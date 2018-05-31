@@ -4,7 +4,13 @@ defmodule Mox.Application do
   use Application
 
   def start(_, _) do
-    children = [Mox.Server]
-    Supervisor.start_link(children, name: Mox.Supervisor, strategy: :one_for_one)
+    import Supervisor.Spec, warn: false
+
+    children = [
+      worker(Mox.Server, [])
+    ]
+
+    opts = [strategy: :one_for_one, name: Mox.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 end

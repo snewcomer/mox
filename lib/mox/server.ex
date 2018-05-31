@@ -6,6 +6,10 @@ defmodule Mox.Server do
 
   # API
 
+  def start_link do
+    GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
+  end
+
   def start_link(_options) do
     GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
   end
